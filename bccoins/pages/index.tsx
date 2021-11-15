@@ -2,21 +2,21 @@ import type { NextPage } from 'next'
 
 
 const Home: NextPage = (props) => {
+  
   return (
     <div>
-       {props.data.map((item) => {
-          return (
-            <div key={item.id}>
-              {item.symbol}: {item.market_data.current_price.btc}
-            </div>
-          );
-        })}
+        {props.data ? props.data.slice(0,20).map((item, idx) =>
+          <div key={idx}>
+            {item.symbol}: 
+            {item.bidPrice}
+          </div>)
+        : null}
     </div>
   )
 }
 
 export async function getStaticProps() {
-  const data = await fetch('https://api.coingecko.com/api/v3/coins').catch((err) =>
+  const data = await fetch('https://api.binance.com/api/v3/ticker/24hr').catch((err) =>
     console.log(err)
   )
   const response = await data.json()
