@@ -8,7 +8,7 @@ const Home: NextPage = (props) => {
         {props.data ? props.data.slice(0,20).map((item, idx) =>
           <div key={idx}>
             {item.symbol}: 
-            {item.bidPrice}
+            {item.price}
           </div>)
         : null}
     </div>
@@ -16,7 +16,7 @@ const Home: NextPage = (props) => {
 }
 
 export async function getStaticProps() {
-  const data = await fetch('https://api.binance.com/api/v3/ticker/24hr').catch((err) =>
+  const data = await fetch('https://api.binance.com/api/v3/ticker/price').catch((err) =>
     console.log(err)
   )
   const response = await data.json()
